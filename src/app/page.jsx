@@ -2,9 +2,13 @@
 
 import Link from "next/link";
 import Hero from "@/components/sheard/Home/Hero";
-import { DotLottiePlayer } from "@dotlottie/react-player";
+ 
 import HomeCategory from "@/components/sheard/Home/HomeCategory";
 import PopularCourse from "@/components/sheard/Home/PopularCourse";
+import SeminarAndEvent from "@/components/sheard/Home/SeminarAndEvent";
+import WhatWeProvide from "@/components/sheard/Home/WhatWeProvide";
+import Concerns from "@/components/sheard/Home/Concerns";
+import SuccesHistory from "@/components/sheard/Home/SuccesHistory";
 
 const HomePage = () => {
   return (
@@ -40,15 +44,10 @@ const HomePage = () => {
         {/* Hero Section */}
         <div
           className="max-h-[calc(100vh-8rem)] py-12 md:py-16 lg:py-24 bg-cover bg-center bg-no-repeat w-full relative"
-          style={{ backgroundImage: `url("")` }}
+          style={{ backgroundImage: `url("/images/bgg.png")` }}
         >
           <div className="flex items-center 2xl:py-5 relative">
-            <DotLottiePlayer
-              className="absolute w-[450px] -bottom-5 -z-10 right-0"
-              src="https://lottie.host/e8635977-030c-4254-88ae-e848cc27ecde/Ba86pVa1cR.lottie"
-              loop
-              autoplay
-            />
+            
             <Hero />
           </div>
         </div>
@@ -61,6 +60,10 @@ const HomePage = () => {
       >
         <PopularCourse />
       </div>
+      <SeminarAndEvent/>
+      <WhatWeProvide/>
+      <Concerns/>
+      <SuccesHistory/>
     </div>
   );
 };
