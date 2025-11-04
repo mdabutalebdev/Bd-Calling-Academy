@@ -1,12 +1,10 @@
- 
-
 import React from "react";
 import { IoMdCall } from "react-icons/io";
 import { IoMailOutline } from "react-icons/io5";
 import { SlSocialLinkedin } from "react-icons/sl";
 import Link from "next/link";
 import { FiYoutube } from "react-icons/fi";
-import { FaFacebookF } from "react-icons/fa";
+import { LuFacebook } from "react-icons/lu";
 const TopHeader = () => {
   return (
     <div className=" bg-[#77dbd6] work hidden lg:block">
@@ -39,7 +37,7 @@ const TopHeader = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <FaFacebookF className="text-[#414042]"/>
+                  <LuFacebook className="text-[#414042]" />
                 </a>
 
                 {/* YouTube */}
