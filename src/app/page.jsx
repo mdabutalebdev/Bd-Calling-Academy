@@ -17,14 +17,14 @@ const HomePage = () => {
       <div className="relative">
         {/* Fixed Vertical Join Seminar Button */}
         <div
-          className="animated-bg fixed z-50 left-0 top-7/12 -translate-y-1/2 text-white px-6 py-2 rounded-l-lg cursor-pointer shadow-2xl "
+          className="animated-bg fixed z-50 left-0 top-7/12 -translate-y-1/2 text-white  px-3 md:px-6 py-2 rounded-l-lg cursor-pointer shadow-2xl "
           style={{
             writingMode: "vertical-rl",
             transform: "translateY(-50%) rotate(180deg)",
           }}
         >
           <Link href="/events">
-            <h3 className=" outfit-semibold uppercase">Join Seminar</h3>
+            <h3 className=" font-normal text-[14px] lg:outfit-semibold uppercase">Join Seminar</h3>
           </Link>
         </div>
 
