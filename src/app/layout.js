@@ -10,6 +10,7 @@ import "./globals.css";
 import Navbar from "../components/sheard/Navbar";
 import Footer from "@/components/sheard/Footer";
 import TopHeader from "@/components/sheard/TopHeader";
+import PaymentMethod from "@/components/sheard/PaymentMethod";
 
 // Google Fonts  
 const poppins = Poppins({
@@ -59,6 +60,7 @@ export default function RootLayout({ children }) {
         <TopHeader />
         <Navbar />
         {children}
+        <PaymentMethod/>
         <Footer />
       </body>
     </html>

@@ -61,13 +61,13 @@ const TopHeader = () => {
 
               <div className="flex gap-4 text-[15px]">
                 <Link
-                  href="#"
+                  href="/login"
                   className="border-r border-[#414042] px-3 text-[#414042]"
                 >
                   Login
                 </Link>
 
-                <Link href="#" className="text-[#414042]">
+                <Link href="/register" className="text-[#414042]">
                   Register{" "}
                 </Link>
               </div>
