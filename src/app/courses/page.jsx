@@ -1,9 +1,27 @@
-import React from 'react'
+"use client";
+
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { feachCourseData } from "@/redux/CourseSlice";
 
 const page = () => {
-  return (
-    <div>page</div>
-  )
-}
+  const dispatch = useDispatch();
+  const { courses } = useSelector((state) => state.courses);
+  useEffect(() => {
+    dispatch(feachCourseData());
+  }, []);
 
-export default page
+  return (
+    <div>
+      {courses.map((course) => (
+        <div key={course.id}>
+          {" "}
+       
+          {course.title}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default page;
