@@ -11,8 +11,9 @@ import Navbar from "../components/sheard/Navbar";
 import Footer from "@/components/sheard/Footer";
 import TopHeader from "@/components/sheard/TopHeader";
 import PaymentMethod from "@/components/sheard/PaymentMethod";
+import ReduxProviderWrapper from "@/components/ReduxProvaiderWrapper";
 
-// Google Fonts  
+// Google Fonts
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -27,7 +28,7 @@ const lobster = Lobster({
   subsets: ["latin"],
   weight: ["400"],
   variable: "--font-lobster",
-});  
+});
 const caveat = Caveat({
   subsets: ["latin"],
   weight: ["400", "700"],
@@ -57,11 +58,13 @@ export default function RootLayout({ children }) {
       className={`${poppins.variable} ${roboto.variable} ${lobster.variable} ${caveat.variable} ${worksans.variable} ${outfit.variable}`}
     >
       <body className="antialiased">
-        <TopHeader />
-        <Navbar />
-        {children}
-        <PaymentMethod/>
-        <Footer />
+        <ReduxProviderWrapper>
+          <TopHeader />
+          <Navbar />
+          {children}
+          <PaymentMethod />
+          <Footer />
+        </ReduxProviderWrapper>
       </body>
     </html>
   );
