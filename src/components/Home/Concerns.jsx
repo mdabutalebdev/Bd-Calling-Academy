@@ -3,7 +3,8 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import SectionHeading from "../SectionHeading";
+import SectionHeading from "../sheard/SectionHeading";
+ 
  
 
 const Concerns = () => {
@@ -73,13 +74,13 @@ const Concerns = () => {
     <div className="bg-white py-12 relative">
       <div
         className="relative container border border-gray-200 bg-cover mx-auto py-12 px-6 rounded-2xl"
-        style={{ backgroundImage: `url('/bg1.png')` }}
+        style={{ backgroundImage: `url('/images/bg1.png')` }}
       >
         {/* Overlay */}
         <div
           className="absolute inset-0 rounded-2xl bg-cover bg-center opacity-10"
           style={{
-            backgroundImage: `url('/overlay.jpg')`,
+            backgroundImage: `url('')`,
           }}
         ></div>
 

@@ -1,5 +1,7 @@
 import React from 'react'
-import SectionHeading from '../SectionHeading'
+import SectionHeading from '../sheard/SectionHeading'
+import PopularCourseCard from './PopularCourseCard'
+ 
 
 const PopularCourse = () => {
   return (
@@ -11,6 +13,7 @@ const PopularCourse = () => {
             "At Bdcalling Academy, we provide skill-based training programs customized to meet the evolving needs of today’s job market. Whether you're just beginning your career or looking to upgrade your professional expertise, our flexible learning options are designed to help you stay competitive and confident in the digital workforce."
           }
         /> 
+        <PopularCourseCard/>
         
       </div>
     </div>

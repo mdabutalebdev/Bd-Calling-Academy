@@ -3,7 +3,8 @@
 import React, { useState } from "react";
  
 import Link from "next/link";
-import SectionHeading from "../SectionHeading";
+import SectionHeading from "../sheard/SectionHeading";
+ 
  
 
 const videoData = [

@@ -50,7 +50,7 @@ const Value = () => {
     <div className="bg-[#ecfcfb] pb-5">
       <div
         className=" mx-auto px-4 sm:px-6 lg:px-24 shadow-md bg-cover  container py-12 rounded-md"
-        style={{ backgroundImage: `url("/images/bg1.png")` }}
+        style={{ backgroundImage: `url(" ")` }}
       >
         <div className="flex flex-col  justify-center items-center">
           <div className="flex items-center gap-2 border border-gray-200 py-1 px-2 pr-5 rounded-4xl work w-fit crd">

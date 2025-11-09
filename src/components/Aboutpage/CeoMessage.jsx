@@ -24,7 +24,7 @@ const CeoMessage = () => {
   return (
     <div className="bg-[#ECFCFB]">
       <div
-        style={{ backgroundImage: `url("/images/bg1.png")` }}
+        style={{ backgroundImage: `url(" ")` }}
         className="container mx-auto bg-cover px-6 md:px-12 py-16 md:py-20 rounded-md"
       >
         <div className="flex flex-col lg:flex-row flex-wrap justify-center gap-16">
