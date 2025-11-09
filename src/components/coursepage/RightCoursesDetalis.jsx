@@ -1,69 +1,74 @@
-"use client"
-
+"use client";
 
 import React, { useState, useEffect } from "react";
- 
+import { useSelector, useDispatch } from "react-redux";
 import CourseCard from "./CourseCard";
  
+import { useSearchParams } from "next/navigation";
+import { fetchCoursesData } from "../../redux/CourseSlice";
 
-const RightCoursesDetalis = ({ filteredCourses }) => {
- 
-  const urlType = searchParams.get("type"); // query থেকে ধরছে
+const RightCoursesDetalis = () => {
+  const dispatch = useDispatch();
+  const searchParams = useSearchParams();
+
+  const { courses = [], loading = false } = useSelector((state) => state.courses || {});
+  const { selectedCategories = [] } = useSelector((state) => state.categories || {});
+
+  const urlType = searchParams.get("type");
   const [selectedType, setSelectedType] = useState("All");
   const [selectedMentor, setSelectedMentor] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  // useEffect: query param change হলে selectedType সেট করো
+useEffect(() => {
+  dispatch(fetchCoursesData());
+}, [dispatch]);
+
+
   useEffect(() => {
-    if (urlType && ["Online", "Offline", "Recorded"].includes(urlType)) {
-      setSelectedType(urlType);
-    } else {
-      setSelectedType("All");
-    }
+    if (urlType && ["Online","Offline","Recorded"].includes(urlType)) setSelectedType(urlType);
+    else setSelectedType("All");
   }, [urlType]);
 
-  const allMentors = [...new Set(filteredCourses.map(course => course.instructorName))];
+  const allMentors = [...new Set(courses.map(c => c?.instructorName).filter(Boolean))];
 
-  const filteredByType = filteredCourses.filter((course) => {
-    const typeMatch = selectedType === "All" || course.type === selectedType;
-    const mentorMatch = !selectedMentor || course.instructorName === selectedMentor;
-    return typeMatch && mentorMatch;
+  const filteredCourses = courses.filter((course) => {
+    if (!course) return false;
+    const typeMatch = selectedType === "All" || course?.type === selectedType;
+    const mentorMatch = !selectedMentor || course?.instructorName === selectedMentor;
+    const categoryMatch = selectedCategories.length === 0 || selectedCategories.includes(course?.category);
+    return typeMatch && mentorMatch && categoryMatch;
   });
 
-  const handleTypeChange = (type) => {
-    setSelectedType(type);
-    setSelectedMentor(null);
-  };
+  const handleTypeChange = (type) => { setSelectedType(type); setSelectedMentor(null); };
+  const handleMentorSelect = (mentor) => { setSelectedMentor(mentor === selectedMentor ? null : mentor); setIsDropdownOpen(false); };
 
-  const handleMentorSelect = (mentor) => {
-    setSelectedMentor(mentor === selectedMentor ? null : mentor);
-    setIsDropdownOpen(false);
-  };
-
-  const typeButtons = ["All", "Online", "Offline", "Recorded"];
+  const typeButtons = ["All","Online","Offline","Recorded"];
 
   return (
     <div className="flex flex-col gap-7">
+      {/* Filters */}
       <div className="flex flex-col md:flex-row gap-6 items-center justify-between">
-        <h1 className="text-[#F79952] text-4xl md:text-5xl outfit-semibold ">
+        <h1 className="text-[#F79952] text-4xl md:text-5xl outfit-semibold">
           Our <span className="crd">Courses</span>
         </h1>
+
         <div className="flex flex-col md:flex-row items-center gap-4">
-          <div className="flex items-center gap-4"> 
+          <div className="flex items-center gap-4">
             {typeButtons.map((type) => (
               <button
                 key={type}
                 onClick={() => handleTypeChange(type)}
-                className={`py-2 px-4 cursor-pointer rounded-md  transition-colors ${
+                className={`py-2 px-4 cursor-pointer rounded-md transition-colors ${
                   selectedType === type
                     ? "bg-[#41bfb8] text-white font-medium"
-                    : " text-black border border-gray-300"
+                    : "text-black border border-gray-300"
                 }`}
               >
                 <p className="text-sm md:text-base">{type}</p>
               </button>
             ))}
           </div>
+
           <div className="relative">
             <button
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
@@ -73,12 +78,11 @@ const RightCoursesDetalis = ({ filteredCourses }) => {
                   : "bg-[#F79952] hover:bg-[#F79952]/85"
               }`}
             >
-              <p className="text-sm md:text-base">
-                {selectedMentor || " Select Mentor 🖌️"}
-              </p>
+              <p className="text-sm md:text-base">{selectedMentor || "Select Mentor 🖌️"}</p>
             </button>
+
             {isDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-50 bg-white rounded-md shadow-lg z-10 max-h-100 overflow-y-auto">
+              <div className="absolute right-0 mt-2 w-52 bg-white rounded-md shadow-lg z-10 max-h-60 overflow-y-auto">
                 {allMentors.length > 0 ? (
                   allMentors.map((mentor) => (
                     <div
@@ -94,9 +98,7 @@ const RightCoursesDetalis = ({ filteredCourses }) => {
                     </div>
                   ))
                 ) : (
-                  <div className="px-4 py-2 text-sm text-gray-500">
-                    No mentors available
-                  </div>
+                  <div className="px-4 py-2 text-sm text-gray-500">No mentors available</div>
                 )}
               </div>
             )}
@@ -104,29 +106,20 @@ const RightCoursesDetalis = ({ filteredCourses }) => {
         </div>
       </div>
 
-      {/* Course Card Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-6">
-        {filteredByType.length > 0 ? (
-          filteredByType.map((course) => (
-            <CourseCard
-              key={course.id}
-              id={course.id}
-              title={course.title}
-              image={course.image}
-              category={course.category}
-              rating={course.rating}
-              type={course.type}
-              fee={course.fee}
-            />
-          ))
-        ) : (
-          <div className="col-span-full text-center py-10">
-            <p className="text-lg text-gray-600">
-              No courses found matching your filters
-            </p>
-          </div>
-        )}
-      </div>
+      {/* Courses Grid */}
+      {loading ? (
+        <p>Loading courses...</p>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-6">
+          {filteredCourses.length > 0 ? (
+            filteredCourses.map((course) => <CourseCard key={course?.id} course={course} />)
+          ) : (
+            <div className="col-span-full text-center py-10">
+              <p className="text-lg text-gray-600">No courses found matching your filters</p>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };
