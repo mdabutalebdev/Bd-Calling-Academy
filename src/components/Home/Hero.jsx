@@ -55,7 +55,7 @@ const Hero = () => {
                 </div>
 
                 {/* Total Students */}
-                <div className=" flex items-center gap-1.5 w-full sm:w-auto">
+                <div className=" flex items-center gap-1.5 w-full sm:w-auto max-sm:ml-6">
                   <div>
                     <div className="stat-title text-xs sm:text-sm crd">
                       Total Students
