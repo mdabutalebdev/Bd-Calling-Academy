@@ -19,9 +19,12 @@ const LeftCategory = () => {
     dispatch(setSelectedCategories(newSelection));
   };
 
-  const filteredCategories = courseCategories.filter((category) =>
+const filteredCategories = courseCategories
+  .filter((category) => category.name !== "All") // ignore All from JSON
+  .filter((category) =>
     category.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
 
   return (
     <div className="w-full">
